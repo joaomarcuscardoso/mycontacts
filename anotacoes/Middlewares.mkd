@@ -1,0 +1,15 @@
+Padrão:
+Request -> Controller -> Responde
+Request <-> Middlewares -> Controller -> Responde
+Middlewares(Regras de Negocio);
+
+router.get(
+'/contacts',
+(request, response, next) => {
+request.appId = 'MeuAppId';
+next();
+},
+ContactController.index,
+);
+
+Middlewares são executadas antes do controller sendo assim ele que faz a validação.
