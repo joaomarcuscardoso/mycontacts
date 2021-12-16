@@ -1,3 +1,4 @@
 {
-  "liveServer.settings.multiRootWorkspaceName": "mycontacts"
+  "liveServer.settings.multiRootWorkspaceName": "mycontacts",
+  "cSpell.ignoreWords": ["VARCHAR"]
 }

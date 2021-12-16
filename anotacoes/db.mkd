@@ -1,0 +1,36 @@
+# Criando a base de dados
+
+no Terminal:
+docker exec -it pg bash
+psql -U root
+CREATE DATABASE mycontacts;
+
+// Habilita a extensão uuid
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+// Criando a tabela
+
+CREATE TABLE categories(
+id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+name VARCHAR NOT NULL
+);
+no projeto adicionamos a dependencia pg, yarn add pg.
+
+Para conectar ao banco criamos index.js na pasta database que contém:
+const { Client } = require('pg');
+
+const client = new Client({
+host: 'localhost',
+port: 5432,
+user: 'root',
+password: 'root',
+database: 'mycontacts',
+});
+
+client.connect();
+
+// Vamos fazer agora um module.exports de uma função que receber query e executa no db.
+
+exports.query = async (query, values) => {
+const { rows } = await client.query(query, values);
+return rows;
+};
